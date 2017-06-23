@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const router = require('./router');
 const crawler = require('./crawler');
+const bot = require('./bot');
 
 // GET: /
 router.get('/', (req, res) => {
@@ -27,8 +28,12 @@ router.get('/thread', (req, res) => {
         });
 });
 
+// start bot listen
+bot.listen();
+
 const server = http.createServer(router.route);
 
+// start server listen
 server.listen(3000, '127.0.0.1', () => {
     const addr = server.address();
     console.log(`Server listening at http://${addr.address}:${addr.port}`);
